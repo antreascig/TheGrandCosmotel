@@ -1,0 +1,54 @@
+﻿@model WebGames.Models.ViewModels.HomeIndexViewModel
+@section Scripts {
+
+}
+
+
+@*<div class="jumbotron">
+    <img src="/Content/images/cosmotelogo.png" id="cosmologo">
+
+        <h1> Hello @User.Identity.Name </h1>
+        <p><a class="btn btn-primary btn-lg" href="@Url.Action("Group", "Games")" role="button">Start Playing</a></p>
+
+    </div>*@
+
+<div class="wrapper">
+    <div class="screen screen1">
+
+        <div class="messageoftheday">
+            <h1>Το ταξίδι σου στον κόσμο του μαγεμένου τσίρκου ολοκληρώθηκε!</h1>
+            <p>Η μεγάλη στιγμή για σένα και την ομάδα* σου έφτασε… </p>
+            <p>Μπές στο cosmoplay.gr την Πέμπτη 18 Μαΐου για να μάθεις εάν προκρίθηκες στον Τριήμερο Τελικό στο Πόρτο Χέλι! (26-28 Μαΐου).</p>
+            <br>
+            <p class="explain" style="font-size: 12px;">* Υπενθυμίζουμε ότι οι ομάδες του τελικού διαμορφώθηκαν βάση ατομικής και ομαδικής κατάταξης και λαμβάνοντας υπόψιν την εύρυθμη λειτουργία των καταστημάτων.</p>
+        </div>
+
+        @*@if (Model.IsWinner)
+        {
+
+            <div class="messageoftheday">
+                <h1>Συγχαρητήρια!</h1>
+                <p>Έχεις προκριθεί στον τριήμερο τελικό του Cosmoplay-Circus 2017 στο Πόρτο Χέλι 26-28 Μαΐου!</p>
+                <p>Μια αξέχαστη εμπειρία σε περιμένει!</p>
+                <p>Περισσότερες πληροφορίες μπορείς να δεις 
+                    <a style="font-weight: bold;text-decoration: underline;" href="/Files/GetWinnerInfo">
+                        εδώ</a>, ενώ μέσα στην ημέρα θα σου σταλεί αναλυτική ενημέρωση και στο εταιρικό σου email.
+                </p>
+                <br>
+                <p class="explain" style="font-size: 12px;">* Υπενθυμίζουμε ότι οι ομάδες του τελικού διαμορφώθηκαν βάση ατομικής και ομαδικής κατάταξης και λαμβάνοντας υπόψιν την εύρυθμη λειτουργία των καταστημάτων.</p>
+            </div>
+
+        }
+        else
+        {
+            <div class="messageoftheday">
+                <h1>Ευχαριστούμε για τη συμμετοχή σου!</h1>
+                <p>Ελπίζουμε να απόλαυσες το ταξίδι σου στον κόσμο του μαγεμένου τσίρκου.</p>
+                <p>Δυστυχώς δεν κατάφερες να προκριθείς στον τριήμερο τελικό στο Πόρτο Χέλι.</p>
+                <br>
+                <p class="explain" style="font-size: 12px;">* Υπενθυμίζουμε ότι οι ομάδες του τελικού διαμορφώθηκαν βάση ατομικής και ομαδικής κατάταξης και λαμβάνοντας υπόψιν την εύρυθμη λειτουργία των καταστημάτων.</p>
+            </div>
+        }*@
+
+    </div>
+</div>

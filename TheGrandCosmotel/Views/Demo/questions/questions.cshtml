@@ -1,0 +1,281 @@
+﻿@using WebGames.Libs
+@using WebGames.Libs.Games.GameTypes
+@using Microsoft.AspNet.Identity
+
+@model ActiveUserGameInfo
+
+<div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="~/Content/Games/css/style.css">
+
+    <audio preload='auto' loop id="music">
+        <source src="/Content/music/lockbg.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="correct" preload="auto">
+        <source src="/Content/music/correct.mp3" />
+    </audio>
+    <audio id="wrong" preload="auto">
+        <source src="/Content/music/locked.mp3" />
+    </audio>
+    <div id="preloader">
+        <div class="windows8">
+            <div class="wBall" id="wBall_1">
+                <div class="wInnerBall"></div>
+            </div>
+            <div class="wBall" id="wBall_2">
+                <div class="wInnerBall"></div>
+            </div>
+            <div class="wBall" id="wBall_3">
+                <div class="wInnerBall"></div>
+            </div>
+            <div class="wBall" id="wBall_4">
+                <div class="wInnerBall"></div>
+            </div>
+            <div class="wBall" id="wBall_5">
+                <div class="wInnerBall"></div>
+            </div>
+        </div>
+        <img src="~/Content/images/startbutton.png" id="letsgo">
+    </div>
+    <div class="wrapper">
+        <div class="game questions stage1">
+            <div id="score">SCORE: <span>@Model.GameScore</span></div>
+            <div class="logo"></div>
+            <div class="pause"></div>
+            <div id="explainer">
+                <span class="exit"></span>
+                <h2>Κλειδιά</h2>
+
+                <p>Το circus ζητάει να μάθει τα πάντα και έχει βαλθεί να σου κάνει ερωτήσεις!</p>
+                <ul>
+                    <li>Επίλεξε μια κλειδαριά για να ανοίξεις μια ερώτηση.</li>
+                    <br>
+                    <li>Πόσες ερωτήσεις μπορείς να απαντήσεις στο χρόνο που σου δίνεται;</li>
+                    <br>
+                    <li>Με κάθε σωστή απάντηση κερδίζεις 3 πόντους</li>
+                </ul>
+            </div>
+            <div id="time" class="clock"></div>
+            <div class="gamewrap">
+                <div class="locks">
+                    <img class="lock" id="lock1" src="~/Content/images/locks/1.png">
+                    <img class="lock" id="lock33" src="~/Content/images/locks/2.png">
+                    <img class="lock" id="lock2" src="~/Content/images/locks/2.png">
+                    <img class="lock" id="lock3" src="~/Content/images/locks/3.png">
+                    <img class="lock" id="lock4" src="~/Content/images/locks/4.png">
+                    <img class="lock" id="lock5" src="~/Content/images/locks/5.png">
+                    <img class="lock" id="lock6" src="~/Content/images/locks/6.png">
+                    <img class="lock" id="lock7" src="~/Content/images/locks/7.png">
+                    <img class="lock" id="lock8" src="~/Content/images/locks/8.png">
+                    <img class="lock" id="lock9" src="~/Content/images/locks/9.png">
+                    <img class="lock" id="lock10" src="~/Content/images/locks/10.png">
+                    <img class="lock" id="lock11" src="~/Content/images/locks/11.png">
+                    <img class="lock" id="lock12" src="~/Content/images/locks/12.png">
+                    <img class="lock" id="lock13" src="~/Content/images/locks/13.png">
+                    <img class="lock" id="lock14" src="~/Content/images/locks/14.png">
+                    <img class="lock" id="lock15" src="~/Content/images/locks/15.png">
+                    <img class="lock" id="lock16" src="~/Content/images/locks/16.png">
+                    <img class="lock" id="lock17" src="~/Content/images/locks/17.png">
+                    <img class="lock" id="lock18" src="~/Content/images/locks/18.png">
+                    <img class="lock" id="lock19" src="~/Content/images/locks/19.png">
+                    <img class="lock" id="lock20" src="~/Content/images/locks/20.png">
+                    <img class="lock" id="lock21" src="~/Content/images/locks/21.png">
+
+                    <img class="lock" id="lock22" src="~/Content/images/locks/2.png">
+                    <img class="lock" id="lock23" src="~/Content/images/locks/4.png">
+                    <img class="lock" id="lock24" src="~/Content/images/locks/6.png">
+                    <img class="lock" id="lock25" src="~/Content/images/locks/8.png">
+                    <img class="lock" id="lock26" src="~/Content/images/locks/10.png">
+                    <img class="lock" id="lock27" src="~/Content/images/locks/12.png">
+                    <img class="lock" id="lock28" src="~/Content/images/locks/14.png">
+                    <img class="lock" id="lock29" src="~/Content/images/locks/16.png">
+                    <img class="lock" id="lock30" src="~/Content/images/locks/18.png">
+                    <img class="lock" id="lock32" src="~/Content/images/locks/21.png">
+
+                </div>
+                <div id="attempts" style="display: none;">Έχεις <div id="s1">άλλες</div> <span></span> <div id="s2">ερωτήσεις</div></div>
+                <div id="success">
+                    <div class="message">
+                        <h1>FIN!</h1>
+                        <p>Τέλος για σήμερα! <br>Επέστρεψε αύριο για να κερδίσεις ακόμα περισσότερους πόντους!</p>
+                    </div>
+                </div>
+                <div id="quiz">
+                    <div id="question"></div>
+                    <button class="answer" id="a1" data-answer="1"></button>
+                    <button class="answer" id="a2" data-answer="2"></button>
+                    <button class="answer" id="a3" data-answer="3"></button>
+                    <button class="answer" id="a4" data-answer="4"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="/Scripts/custom/serverAPI.js"></script>
+    <script src="~/Content/Games/js/jquery.easyaudioeffects.1.0.0.min.js"></script>
+    <script src="~/Content/Games/js/jquery.glow.js"></script>
+
+    <script>
+        // Init
+        window.customGameKey = '@WebGames.Libs.GameKeys.Questions';
+
+        var RemainingTime = @Model.RemainingTime;
+        @if(Model.IsDemo)
+        {
+            @:var questions = [{  "id" :"2", "question":"Ποιο είναι το χημικό σύμβολο του σιδήρου;", "answer1":"Io", "answer2":"Pb", "answer3":" Fe", "answer4":"Ir", "correct":3 }];
+            @:var isDemo = true;
+        }
+        else
+        {
+            @:var isDemo = false;
+
+            @:var questions = [];
+
+            foreach(var q in Questions_Manager.GetPlayerQuestions(User.Identity.GetUserId()))
+            {
+                @:questions.push({ id: @q.QuestionId, question: '@q.QuestionText', answer1: '@q.Options[0]', answer2: '@q.Options[1]', answer3: '@q.Options[2]', answer4: '@q.Options[3]' })
+            }
+        }
+    </script>
+
+    <script src="~/Content/Games/js/pxloader.js"></script>
+    <script>
+        var loader = new PxLoader(),
+            audio1 = loader.addAudio('/Content/music/lockbg.mp3'),
+            audio3 = loader.addAudio('/Content/music/correct.mp3');
+
+    </script>
+    <script src="~/Content/Games/js/questions.init.js"></script>
+
+    <script>
+
+        var clearClasses = function () {
+            setTimeout(function () {
+                $('.answer').removeClass('wrong').removeClass('correct');
+                $('#quiz').removeClass('blocked');
+            }, 500);
+        }
+        $(document).ready(function () {
+            var QuestionIndex = 0;
+            $('.exit').click(function(event) {
+                /* Act on the event */
+                isPaused = false;
+                $('#explainer').hide();
+            });
+            $('.pause').click(function(event) {
+                /* Act on the event */
+                isPaused = true;
+                $('#explainer').show();
+            });
+            $('.lock').hover(function () {
+                $(this).glow({ radius: "8", color: "#fffb3d" });
+            }, function () {
+                $(this).glow({ disable: true });
+            });
+            $('#attempts span').html(tries);
+
+            $('body').on('click', '.lock', function (event) {
+
+                if (tries > 0) {
+                    // $(this).addClass('clicked');
+                }
+                if (tries >= 1) {
+                    tries--;
+                    $('#attempts span').html(tries);
+                    if (tries == 1) {
+                        $('#s1').html('άλλη');
+                        $('#s2').html('ερώτηση');
+                    }
+                    $('#quiz').fadeIn(500);
+                    event.preventDefault();
+
+                    //if (QuestionIndex == questions.length) {
+                    //    // no more questions
+                    //    alert('Δεν έχεις άλλες ερωτήσεις');
+                    //    return;
+                    //}
+
+                    var randomQ = questions[QuestionIndex];
+                    $('#question').html(randomQ['question']);
+                    $('#question').data('qId', randomQ['id'] );
+                    $('#a1').html(randomQ['answer1']);
+                    $('#a2').html(randomQ['answer2']);
+                    $('#a3').html(randomQ['answer3']);
+                    $('#a4').html(randomQ['answer4']);
+                    correctAnswer = randomQ['correct'];
+
+                    QuestionIndex++;
+                } else {
+                    return;
+                }
+            });
+            $('body').on('click', '.answer', function (event) {
+                event.preventDefault();
+                $('#quiz').addClass('blocked');
+                var self = this;
+                function HandleQuestions(isCorrect, correctIndex) {
+                    if (isCorrect) {
+                        $('#score span').text(Number($('#score span').text()) + 3);
+                        $(self).addClass('correct');
+                        correct.play();
+                        if (tries == 0) {
+                            setTimeout(function () {
+                                $('#quiz').fadeOut(500);
+                                clearClasses();
+                                $('#success').show(500);
+                                //done message
+                            }, 1500);
+                        } else {
+                            setTimeout(function () {
+                                $('#quiz').fadeOut(500);
+                                clearClasses();
+                            }, 1500);
+                        }
+                    } else {
+                        wrong.play();
+                        $(self).addClass('wrong');
+                        $('#a' + correctIndex).addClass('correct');
+                        if (tries == 0) {
+                            setTimeout(function () {
+                                $('#quiz').fadeOut(500);
+                                clearClasses();
+                                $('#success').show(500);
+                                //done message
+                            }, 1500);
+                        } else {
+                            setTimeout(function () {
+                                $('#quiz').fadeOut(500);
+                                clearClasses();
+                            }, 1500);
+                        }
+                    }
+                }
+
+
+
+                var qId = $('#question').data('qId');
+                var answer = $(this).data('answer');
+
+                if (isDemo) {
+                    var isCorrect = $(this).data('answer') == correctAnswer;
+                    HandleQuestions(isCorrect, correctAnswer);
+                }
+                else {
+                    $.custom.Server.CheckQuestion(qId, answer, true,
+                        function (res) { // success
+                            if (res && res.success) { // to time einai remaining seconds
+                                HandleQuestions(res.isCorrect, res.correctAnswer);
+                            }
+                            else { // fail
+
+                            }
+                        }, function () { // fail
+
+                        });
+                }
+
+            });
+        });
+    </script>
+</div>

@@ -1,0 +1,49 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>COSMOPLAY2017</title>
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+	<link rel="stylesheet" href="~/Content/ComingSoon/screens.css">
+    <link rel="icon" href="~/Content/ComingSoon/images/favicon.png" type="image/x-icon"/>
+</head>
+<body>
+
+    <script>
+        //window.location = "https://www.cosmoplay.gr/Home";
+    </script>
+	<div class="wrapper">
+		<div class="screen">
+			<img src="~/Content/ComingSoon/images/teaser_main.png">
+			<div class="logo1"><a href="#"><img src="~/Content/ComingSoon/images/teaser_cosmote_logo.png" alt=""></a></div>
+            <div class="logo2"><a href="#"><img src="~/Content/ComingSoon/images/teaser_ote_logo.png" alt=""></a></div>
+		</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script>
+				jQuery.fn.center = function () {
+		    this.css("position","absolute");
+		    this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + 
+		                                                $(window).scrollTop()) + "px");
+		    this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + 
+		                                                $(window).scrollLeft()) + "px");
+		    return this;
+		}
+			$('.screen').center();
+		$(window).on('resize', function(){
+			$('.screen').center();
+		});
+
+		$(document).ready(function() {
+			setTimeout(function(){ $('.screen').center(); }, 150);
+
+			
+});
+	</script>
+</body>
+</html>

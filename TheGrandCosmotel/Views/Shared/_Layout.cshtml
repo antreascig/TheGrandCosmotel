@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Cosmoplay.gr</title>
+    <link rel="icon" href="/Content/ComingSoon/images/favicon.png" type="image/x-icon" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    <script src="@Url.Content("~/Scripts/knockout-3.2.0.js")"></script>
+    <script src="@Url.Content("~/Scripts/custom/jquery.dataTables.js")"></script>
+
+    @{
+        var pageName = (ViewContext.RouteData.Values["controller"].ToString() + "_" + ViewContext.RouteData.Values["action"].ToString()).ToLower();
+    }
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&amp;subset=greek" rel="stylesheet">
+
+</head>
+<body class="@pageName">
+    @*used for ajax in AddAntiForgeryToken()*@
+    <form id="__AjaxAntiForgeryForm" action="#" method="post">@Html.AntiForgeryToken()</form>
+
+    <!-- <div class="navbar navbar-inverse navbar-fixed-top"> -->
+    <div class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*@Html.ActionLink("App", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+            </div>
+            <div class="navbar-collapse collapse">
+
+                <ul class="nav navbar-nav" style="display:block!important;">
+                    <li>@Html.ActionLink("ΚΕΝΤΡΙΚΗ", "index", "home")</li>
+                    <li class="mobileOnly">@Html.ActionLink("Οροι & Προϋποθέσεις", "tnc", "home")</li>
+                    <li>@Html.ActionLink("ΛΙΓΑ ΛΟΓΙΑ ΤΟ ΠΑΙΧΝΙΔΙ", "info", "home")</li>
+
+                </ul>
+
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <img src="/Content/images/otelogo.png" style="display:none;" id="otelogo">
+        @RenderBody()
+        <footer>
+        <img src="/Content/images/cosmoplay.png"> 
+                <div class="mails"><p>Τεχνική Υποστήριξη: <a href="mailto:support@cosmoplay.gr">support@cosmoplay.gr</a> | </p> <p>@Html.ActionLink("Οροι & Προϋποθέσεις", "tnc", "home") | </p>
+                <p>Γενικές Πληροφορίες:</p> <a href="mailto:cosmoplay@cosmoplay.gr">cosmoplay@cosmote.gr</a></div>
+        <br>
+
+
+        </footer>
+
+    </div>
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

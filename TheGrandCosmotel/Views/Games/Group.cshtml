@@ -1,0 +1,64 @@
+﻿@model WebGames.Libs.Games.Games.Group_Team
+
+<script>
+    $(document).ready(function () {
+        $('body').addClass('games_activeexplainer');
+    })
+</script>
+
+<div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="~/Content/Games/css/screens.css">
+
+    <div class="wrapper">
+        <div class="screen screen1">
+            <div class="container body-content">
+                <div class="noactivegame-message">
+                    <span style="font-size: 24px; font-weight: bold;text-shadow: 0 2px 2px #000000;text-align: center;">
+
+                        @if (Model == null)
+                        {
+                            <span>Ευχαριστούμε για τη συμμετοχή σου! <br /> Δυστυχώς δεν κατάφερες να προκριθείς στην επόμενη φάση του παιχνιδιού.</span>
+                        }
+                        else
+                        {
+                            <span>Η Ομάδα σου είναι</span>
+                            <br />
+                            <span>
+                                @( string.Join(", ", Model.UsersInGroup) )
+                            </span>
+                        }
+
+                    </span>
+                </div>
+            </div>
+            @if (Model != null)
+            {
+                <a href="/Games/ActiveGameMap"><img src="~/Content/images/startbutton.png" alt=""></a>
+            }
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>
+        jQuery.fn.center = function () {
+            this.css("position", "absolute");
+            this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) +
+                $(window).scrollTop()) + "px");
+            this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) +
+                $(window).scrollLeft()) + "px");
+            return this;
+        }
+        $('.screen').center();
+        $(window).on('resize', function () {
+            $('.screen').center();
+        });
+
+        $(document).ready(function () {
+            setTimeout(function () { $('.screen').center(); }, 150);
+
+
+        });
+    </script>
+</div>
+

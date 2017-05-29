@@ -1,0 +1,391 @@
+﻿@using WebGames.Libs
+@model ActiveUserGameInfo
+
+@{
+
+    var Rnd = new Random(DateTime.UtcNow.Second);
+
+    var numOfValues = 4;
+    var randomNumbers = new int[numOfValues];
+    for (int i = 0; i < numOfValues; i++)
+    {
+        var num = 0;
+        do
+        {
+            num = Rnd.Next(1, 7);
+        } while (randomNumbers.Contains(num));
+
+        randomNumbers[i] = num;
+    }
+
+
+    var base64Solution = new string[numOfValues];
+    for (int i = 0; i < numOfValues; i++)
+    {
+        var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(randomNumbers[i].ToString());
+        var base64 = System.Convert.ToBase64String(plainTextBytes);
+        base64Solution[i] = base64;
+    }
+}
+
+<div>
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="/Content/Games/css/style.css">
+    <link rel="stylesheet" href="/Content/Games/css/jquery.mCustomScrollbar.css">
+
+    <audio preload='auto' loop id="music">
+        <source src="/Content/music/mastermind.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="deal" preload="auto">
+        <source src="/Content/music/deal.mp3" />
+    </audio>
+    <audio id="win" preload="auto">
+        <source src="/Content/music/win.mp3" />
+    </audio>
+    <div id="preloader">
+        <div class="windows8">
+            <div class="wBall" id="wBall_1">
+                <div class="wInnerBall"></div>
+            </div>
+            <div class="wBall" id="wBall_2">
+                <div class="wInnerBall"></div>
+            </div>
+            <div class="wBall" id="wBall_3">
+                <div class="wInnerBall"></div>
+            </div>
+            <div class="wBall" id="wBall_4">
+                <div class="wInnerBall"></div>
+            </div>
+            <div class="wBall" id="wBall_5">
+                <div class="wInnerBall"></div>
+            </div>
+        </div>
+        <img src="/Content/images/startbutton.png" id="letsgo">
+    </div>
+    <div class="wrapper">
+        <div class="game master stage1">
+            <div class="pause"></div>
+            <div id="explainer">
+                <span class="exit"></span>
+<h2>Μάντεψε τι μάντεψα</h2>
+<p>H Χαρτορίχτρα δε σε αφήνει να φύγεις, αν δε διαβάσεις σωστά τα χαρτιά!</p>
+<p>Έχει βάλει στο μυαλό της μία σειρά 4 καρτών από τις 6 που υπάρχουν στο χέρι σου. Σκοπός του παιχνιδιού είναι να μαντέψεις ποιες είναι οι 4 αυτές κάρτες και να τις τοποθετήσεις στο τραπέζι με τη σειρά που τις έχει επιλέξει η μάντισσα.</p>
+<ul>
+  <li>Τοποθέτησε 4 από τις 6 κάρτες που έχεις στη διάθεσή σου στη σειρά επιλέγοντας πρώτα την κάρτα και μετά τη θέση της</li>
+  <li>Πάτα το κουμπί "Δοκίμασε"</li>
+  <li>Η Χαρτορίχτρα, πάνω δεξιά στην οθόνη, σου απαντάει με μία πράσινη κουκκίδα για κάθε κάρτα που είναι στη σωστή θέση, μια άσπρη κουκίδα για κάθε κάρτα που είναι σε λάθος θέση και ένα Χ για κάθε κάρτα που δεν θα έπρεπε να υπάρχει καθόλου στη σειρά των καρτών.</li>
+ </ul>
+<p>Αν δεν καταφέρεις να μαντέψεις τη σωστή σειρά με την 20η προσπάθεια, το παιχνίδι τελειώνει και η Χαρτορίχτρα σε προκαλεί με νέα σειρά καρτών</p>
+            </div>
+            <div id="score">SCORE: <span>@Model.GameScore</span></div>
+            <div class="logo"></div>
+            <div id="time" class="clock"></div>
+            <div class="gamewrap">
+                <div id="success">
+                    <div class="message">
+                        <h1>ΣΥΓΧΑΡΗΤΗΡΙΑ</h1>
+                        <p>
+                            Κατάφερες να βρεις το σωστό συνδυασμό!
+                            <br>
+                            Επέστρεψε αύριο για να μαζέψεις ακόμα περισσότερους πόντους.
+                        </p>
+                    </div>
+                </div>
+                <div id="fail">
+                    <h1>OYΠΣ</h1>
+                    <p>
+                        Δυστυχώς τελείωσαν οι προσπάθειες σου. <br>
+                        Επέστρεψε αύριο και δοκίμασε ξανά
+                    </p>
+                </div>
+                <div id="solve">Δοκιμασε</div>
+                <div id="attempt">ΠΡΟΣΠΑΘΕΙΑ <span>0</span>/20</div>
+                <div class="slots">
+                    <div class="slot" id="slot1" data-slot="1"></div>
+                    <div class="slot" id="slot2" data-slot="2"></div>
+                    <div class="slot" id="slot3" data-slot="3"></div>
+                    <div class="slot" id="slot4" data-slot="4"></div>
+                    <div class="remove" id="remove1" data-remove="on1"></div>
+                    <div class="remove" id="remove2" data-remove="on2"></div>
+                    <div class="remove" id="remove3" data-remove="on3"></div>
+                    <div class="remove" id="remove4" data-remove="on4"></div>
+                </div>
+                <div class="cards">
+                    <img src="/Content/images/mastermind/card1.png" class="card card1" data-card="1">
+                    <img src="/Content/images/mastermind/card2.png" class="card card2" data-card="2">
+                    <img src="/Content/images/mastermind/card3.png" class="card card3" data-card="3">
+                    <img src="/Content/images/mastermind/card4.png" class="card card4" data-card="4">
+                    <img src="/Content/images/mastermind/card5.png" class="card card5" data-card="5">
+                    <img src="/Content/images/mastermind/card6.png" class="card card6" data-card="6">
+                </div>
+                <div id="solCont"><div id="solutions" class="mCustomScrollbar"></div></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="/Content/Games/js/jquery.easyaudioeffects.1.0.0.min.js"></script>
+    <script src="/Content/Games/js/mastermind.init.js"></script>
+    <script src="/Content/Games/js/jquery.mCustomScrollbar.min.js"></script>
+    <script src="/Content/Games/js/pxloader.js"></script>
+    <script src="/Scripts/custom/serverAPI.js"></script>
+
+
+    <script>
+
+        window.customGameKey = '@WebGames.Libs.GameKeys.Mastermind';
+
+
+        var solution = [];
+        var correctCard = null;
+        var correctSlot = null;
+        var openSlot = null;
+        var removeSlot = null;
+        var slotClass = null;
+        var guess = null;
+        var score = @Model.GameScore;
+        var prevGuess = '0';
+        var slot1guess = null;
+        var slot2guess = null;
+        var slot3guess = null;
+        var slot4guess = null;
+        var lastGuess = null;
+        var lastHint = null;
+        var attempts = 20;
+        var attempt = 0;
+        var music = $("#music")[0];
+        var success = $("#deal")[0];
+        var success = $("#win")[0];
+
+        @foreach(var num in base64Solution)
+        {
+            @:solution.push(atob('@num'));
+        }
+
+        var loader = new PxLoader(),
+            backgroundImg = loader.addImage('/Content/images/bg.jpg'),
+            gamebg = loader.addImage('/Content/images/mastermind-bg.jpg'),
+            logo = loader.addImage('/Content/images/cosmoplay.png'),
+            gameImg1 = loader.addImage('/Content/images/remove.png'),
+            gameImg2 = loader.addImage('/Content/images/mastermind/card1.png'),
+            gameImg3 = loader.addImage('/Content/images/mastermind/card2.png'),
+            gameImg4 = loader.addImage('/Content/images/mastermind/card3.png'),
+            gameImg5 = loader.addImage('/Content/images/mastermind/card4.png'),
+            gameImg6 = loader.addImage('/Content/images/mastermind/card5.png'),
+            gameImg7 = loader.addImage('/Content/images/mastermind/card6.png'),
+            gameImg8 = loader.addImage('/Content/images/mastermind/x.png'),
+            audio1 = loader.addAudio('/Content/music/mastermind.mp3'),
+            audio2 = loader.addAudio('/Content/music/deal.mp3'),
+            audio3 = loader.addAudio('/Content/music/win.mp3');
+
+        // callback that will be run once images are ready
+        loader.addCompletionListener(function (param1, param2, param3) {
+            var time = @Model.RemainingTime;
+
+            display = $('#time');
+
+            var redirUrl = "/Games/ActiveGameAfter?status=outoftime";
+
+            @if ( Model.IsDemo )
+            {
+                @:redirUrl = "/Games/ActiveExplainer";
+            }
+
+
+            startTimer(time, display, redirUrl);
+
+            if (isMobile == true) {
+                $('body').addClass('mobile');
+                $('.windows8').hide();
+                $('#letsgo').addClass('show');
+                $('#letsgo').click(function (event) {
+                    $('#preloader').fadeOut(1000);
+                    $('.wrapper').fadeIn(2000);
+                    music.play();
+                });
+
+            } else {
+
+                $('#preloader').fadeOut(1000);
+                $('.wrapper').fadeIn(2000);
+                music.play();
+                $('.game').center();
+            }
+        });
+
+        // begin downloading images
+
+
+
+
+
+
+
+        $(document).ready(function () {
+            loader.start();
+            // if (localStorage.getItem("mastemindScore") == null) {
+            // 	} else {
+            // 		$('#score span').html(parseInt(localStorage.getItem("mastemindScore")));
+            // 		score += parseInt(localStorage.getItem("mastemindScore"));
+            // 	}
+            $('.cards').on('click', '.card', function (event) {
+                event.preventDefault();
+                $('.card').removeClass('selected');
+                $(this).addClass('selected');
+            });
+
+
+            $('.slots').on('click', '.slot', function (event) {
+                event.preventDefault();
+                openSlot = $(this).data('slot');
+                slotClass = 'on' + openSlot;
+                if ($('.' + slotClass + '').length) {
+                    return;
+                }
+                $('.card.selected').removeClass('selected').addClass(slotClass).addClass('added');
+                if ($(".card").hasClass(slotClass)) {
+                    deal.play();
+                    $(".remove[data-remove='" + slotClass + "']").addClass('active');
+                }
+            });
+
+
+            $('.slots').on('click', '.remove', function (event) {
+                event.preventDefault();
+                removeSlot = $(this).data('remove');
+                $('.' + removeSlot).removeClass(removeSlot).removeClass('added');
+                $(this).removeClass('active');
+            });
+
+            $('#solve').click(function (event) {
+                if (attempt == attempts) {
+                    $('#fail').fadeIn(500);
+                    isPaused = true;
+                    return;
+                }
+
+
+                var correctCard = 0;
+                var correctSlot = 0;
+
+                var slot1guess = $('.card.on1').data('card');
+                var slot2guess = $('.card.on2').data('card');
+                var slot3guess = $('.card.on3').data('card');
+                var slot4guess = $('.card.on4').data('card');
+                lastGuess = '<div class="prevguess">';
+                lastGuess += '<img src="/Content/images/mastermind/card' + slot1guess + '.png"/>';
+                lastGuess += '<img src="/Content/images/mastermind/card' + slot2guess + '.png"/>';
+                lastGuess += '<img src="/Content/images/mastermind/card' + slot3guess + '.png"/>';
+                lastGuess += '<img src="/Content/images/mastermind/card' + slot4guess + '.png"/>';
+
+
+
+                if (undefined != slot1guess && undefined != slot2guess && undefined != slot3guess && undefined != slot4guess) {
+                    guess = [slot1guess, slot2guess, slot3guess, slot4guess];
+                    var guessString = guess.toString();
+                    var prevGuessString = prevGuess.toString();
+                    if (prevGuessString === guessString) {
+                        return;
+                    }
+                    //console.log(guess);
+                    for (var i = 0, l = solution.length; i < l; i++) {
+                        if (solution[i] == guess[i]) {
+                            correctCard++;
+                            if (correctCard == 4) {
+                                isPaused = true;
+                                $('#success').fadeIn(500);
+                                var points = attempts - attempt;
+                                score += points;
+                                localStorage.setItem("mastemindScore", score);
+                                win.play();
+
+                                @if( Model.IsDemo )
+                                {
+                                    @:window.location.replace("/Games/ActiveExplainer");
+                                }
+
+                                $.custom.Server.SaveGameScore(score, 1,
+                                    function (res) { // success
+                                        if (res && res.success) {
+                                            setTimeout(function () {
+                                                $('.wrapper').fadeOut(2000, function () {
+                                                    setTimeout(function () {
+                                                        location.reload();
+                                                    }, 500);
+                                                });
+                                            }, 2000);
+                                        }
+                                        else { // fail
+
+                                        }
+                                    }, function () { // fail
+
+                                    });
+                                return;
+                            }
+                        }
+                        for (var s = 0, l = solution.length; s < l; s++) {
+                            if (solution[i] == guess[s]) {
+                                correctSlot++
+                            }
+                        }
+                        if (i == 3) {
+
+                            lastHint = '<div class="lasthint">';
+                            var wrong = 4;
+                            for (var m = 0, l = correctCard; m < l; m++) {
+                                lastHint += '<span class="blackDot"></span>';
+                                wrong--;
+                            }
+                            for (var n = 0, l = correctSlot - correctCard; n < l; n++) {
+                                lastHint += '<span class="whiteDot"></span>';
+                                wrong--;
+                            }
+                            for (wrong > 0; wrong--;) {
+                                //console.log('wrong');
+                                lastHint += '<span class="wrong"><img src="/Content/images/mastermind/x.png" alt=""></span>';
+                            }
+                            lastHint += '</div>';
+
+                            lastGuess += lastHint;
+                            lastGuess += '</div>';
+                            prevGuess = guess;
+                            attempt++;
+                            $('#attempt span').html(attempt);
+                            $('.mCSB_container').append(lastGuess);
+                            //console.log('there are ' + correctCard + ' cards in the correct position');
+                            //console.log('there are ' + correctSlot + ' correct cards');
+                        }
+
+                    }
+
+
+                }
+                /* Act on the event */
+                event.preventDefault();
+            });
+            @if ( Model.IsDemo )
+            {
+                @:return;
+            }
+
+            setInterval(function () {
+                $.custom.Server.SaveGameTime(timeRemaining,
+                    function (res) { // success
+                        if (res && res.success) {
+                            console.log('Playtime updated');
+                        }
+                        else { // fail
+                            console.log('Playtime not updated!');
+
+                        }
+                    }, function () { // fail
+
+                    });
+            }, 5000);
+
+
+
+        });
+    </script>
+</div>

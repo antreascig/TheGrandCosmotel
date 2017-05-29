@@ -1,0 +1,119 @@
+﻿@using WebGames.Libs
+@using WebGames.Libs.Games.GameTypes
+@using Microsoft.AspNet.Identity
+
+@model ActiveUserGameInfo
+
+<div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="~/Content/Games/css/style.css">
+
+    <audio preload='auto' loop id="music">
+        <source src="/Content/music/forrest.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio preload='auto' id="poof">
+        <source src="/Content/music/poof.mp3" type="audio/mpeg">
+    </audio>
+    <div id="preloader">
+        <div class="windows8">
+            <div class="wBall" id="wBall_1">
+                <div class="wInnerBall"></div>
+            </div>
+            <div class="wBall" id="wBall_2">
+                <div class="wInnerBall"></div>
+            </div>
+            <div class="wBall" id="wBall_3">
+                <div class="wInnerBall"></div>
+            </div>
+            <div class="wBall" id="wBall_4">
+                <div class="wInnerBall"></div>
+            </div>
+            <div class="wBall" id="wBall_5">
+                <div class="wInnerBall"></div>
+            </div>
+        </div>
+        <img src="/Content/images/startbutton.png" id="letsgo">
+    </div>
+    <div class="wrapper">
+        <div class="game mole stage1">
+            <div class="pause"></div>
+            <div id="explainer">
+                <span class="exit"></span>
+<h2>Whack a Mole</h2>
+<p>Οδεύεις προς την Πύλη του Circus όμως κάποια μαγεμένα αντικείμενα σε κυνηγάνε!</p>
+<ul>
+  <li>Έχεις στη διάθεσή σου 3 εργαλεία για να εξαφανίσεις τα αντίστοιχα αντικείμενα: 
+Ένα Frisbee,  ένα μπαλάκι του τένις και μία απόχη</li><br />
+  <li>Κάνε κλικ όσο πιο γρήγορα μπορείς με το σωστό εργαλείο επάνω στα αντικείμενα για να τα εξαφανίσεις</li><br />
+  <li>Κορίνες =  Τις χτυπάς με το Frisbee</li><br />
+  <li>Μπαλάκια τσίρκου =  Τα πιάνεις με την Απόχη</li><br />
+  <li>Καπέλο = Τα χτυπάς με το Μπαλάκι του Τένις </li><br />
+  <li>Άλογο = Μην το χτυπήσεις!</li><br />
+</ul>
+<p>Προσοχή! Εάν χτυπήσεις κάποιο αντικείμενο με λάθος εργαλείο, χάνεις πόντους</p>
+            </div>
+            <div id="flash"></div>
+            <div class="logo"></div>
+            <div id="time" class="clock"></div>
+            <div id="score">SCORE: <span>@Model.GameScore</span></div>
+            <div class="gamewrap">
+                <canvas id="myCanvas" height="200" width="960"></canvas>
+                <div id="stage">
+                    <div class="hole" id="hole1" data-hole="1" data-hasMole="false"></div>
+                    <div class="hole" id="hole2" data-hole="2" data-hasMole="false"></div>
+                    <div class="hole" id="hole3" data-hole="3" data-hasMole="false"></div>
+                    <div class="hole" id="hole4" data-hole="4" data-hasMole="false"></div>
+                    <div class="hole" id="hole5" data-hole="5" data-hasMole="false"></div>
+                    <div class="hole" id="hole6" data-hole="6" data-hasMole="false"></div>
+                    <div class="hole" id="hole7" data-hole="7" data-hasMole="false"></div>
+                    <div class="hole" id="hole8" data-hole="8" data-hasMole="false"></div>
+                    <div class="hole" id="hole9" data-hole="9" data-hasMole="false"></div>
+                    <div class="hole" id="hole10" data-hole="10" data-hasMole="false"></div>
+                    <div class="hole" id="hole11" data-hole="11" data-hasMole="false"></div>
+                </div>
+                <div id="weapons">
+                    <div class="weapon weapon1 selected" data-weapon="1"><img src="/Content/images/weapon1.jpg" alt=""></div>
+                    <div class="weapon weapon2" data-weapon="2"><img src="/Content/images/weapon2.jpg" alt=""></div>
+                    <div class="weapon weapon3" data-weapon="3"><img src="/Content/images/weapon3.jpg" alt=""></div>
+                </div>
+                <div id="layer1"></div>
+                <div id="layer2"></div>
+                <div id="layer3"></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="/Scripts/custom/serverAPI.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenLite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/jquery.gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/plugins/CSSPlugin.min.js"></script>
+    <script src="/Content/Games/js/jquery.easyaudioeffects.1.0.0.min.js"></script>
+    <script src="/Content/Games/js/watch.js"></script>
+    <script src="/Content/Games/js/pxloader.js"></script>
+    <script>
+        var loader = new PxLoader(),
+            audio1 = loader.addAudio('/Content/music/forrest.mp3'),
+            audio3 = loader.addAudio('/Content/music/poof.mp3');
+
+    </script>
+
+    <script>
+            // Init
+
+        window.customGameKey = '@WebGames.Libs.GameKeys.Whackamole';
+
+        var RemainingTime = @Model.RemainingTime;
+        var GameScore = @Model.GameScore;
+        @if(Model.IsDemo) {
+            @:var isDemo = true;
+        }
+        else {
+            @:var isDemo = false;
+        }
+    </script>
+
+
+    <script src="/Content/Games/js/mole.init.js"></script>
+</div>

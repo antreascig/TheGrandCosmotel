@@ -1,0 +1,44 @@
+/**** screens ***/
+body {
+    padding:0;
+    margin:0;
+}
+body * {
+    box-sizing: border-box;
+}
+.wrapper {
+    height: 100vh;
+    background: black url(images/teaser_04.png);
+    background-size: cover;
+}
+.screen {
+    width: 100%;
+    max-width: 1000px;
+    text-align: center;
+    margin: 0 auto;
+    position:relative;
+	-webkit-box-shadow: 10px 8px 22px 10px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 8px 22px 10px rgba(0,0,0,0.75);
+box-shadow: 10px 8px 22px 10px rgba(0,0,0,0.75);
+}
+.screen .logo1 a {
+    display:block;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    transition: all ease 0.2s
+}
+.screen .logo1 a:hover {
+
+}
+
+.screen .logo2 a {
+    display:block;
+    position: absolute;
+    bottom: -4px;
+    right:0;
+    transition: all ease 0.2s
+}
+.screen .logo2 a:hover {
+
+}

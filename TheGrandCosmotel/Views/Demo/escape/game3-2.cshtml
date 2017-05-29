@@ -1,0 +1,133 @@
+﻿@using WebGames.Libs
+@using WebGames.Libs.Games.GameTypes
+@using Microsoft.AspNet.Identity
+
+@model ActiveUserGameInfo
+
+<div>
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="/Content/Games/css/style.css">
+
+	<audio  preload='auto' loop id="myAudio">
+	  <source src="/Content/music/loop.mp3" type="audio/mpeg" >
+	</audio>
+	<audio id="mysoundclip" preload="auto">
+	    <source src="/Content/music/unlock.mp3"/>
+	</audio>
+	<div id="preloader">
+		<div class="windows8">
+			<div class="wBall" id="wBall_1">
+				<div class="wInnerBall"></div>
+			</div>
+			<div class="wBall" id="wBall_2">
+				<div class="wInnerBall"></div>
+			</div>
+			<div class="wBall" id="wBall_3">
+				<div class="wInnerBall"></div>
+			</div>
+			<div class="wBall" id="wBall_4">
+				<div class="wInnerBall"></div>
+			</div>
+			<div class="wBall" id="wBall_5">
+				<div class="wInnerBall"></div>
+			</div>
+		</div>
+		<img src="/Content/images/startbutton.png" id="letsgo">
+	</div>
+	<div class="wrapper">
+		<div class="game cells level32" data-stage="stage3" data-level="level2">
+		            <div class="pause"></div>
+            <div id="explainer">
+                <span class="exit"></span>
+                <h2>Κλουβιά Κλούβια</h2>
+                <p>Ξύπνησες Κλειδωμένος σε ένα κλουβί!
+                    <br /> Για να αποδράσεις πρέπει να μαντέψεις τον μυστικό κωδικό της κλειδαριάς.</p>
+                <ul>
+                    <li>Επίλεξε τα αντικείμενα για να τα κοιτάξεις από κοντά και να ανακαλύψεις τους αριθμούς που κρύβουν. </li>
+                    <li>Αφού βρεις όλους τους αριθμούς του συνδυασμού, , επίλεξε το λουκέτο</li>
+                    <li>Τοποθέτησε τον τριψήφιο κωδικό στα κουτάκια και «Ξεκλείδωσε» το κλουβί.</li>
+                </ul>
+                <p>Θα χρειαστεί να κάνεις αριθμητικές πράξεις και να κρατήσεις σημειώσεις.</p>
+            </div>
+
+					<div id="score">SCORE: <span>0</span></div>
+
+			<div class="overlay"></div>
+			<div class="logo"></div>
+				<div id="lock"></div>
+				<div id="time" class="clock"></div>
+			<div class="gamewrap">
+				<div class="popup">
+					<div class="close"><img src="/Content/images/close.png"></div>
+					<div class="zoom"></div>
+				</div>
+				<div class="unlock">
+					<div class="close"><img src="/Content/images/close.png"></div>
+				
+					<div class="code">
+						<div class="codenum" id="c1">0</div>
+						<div class="codenum" id="c2">0</div>
+						<div class="codenum" id="c3">0</div>
+					</div>
+					<button id="go">
+						ΞΕΚΛΕΙΔΩΣΕ!
+					</button>
+				</div>
+				<img data-clue="6" src="/Content/images/cells/6.png" class="item item12">
+				<img data-clue="8" src="/Content/images/cells/8.png" class="item item11">
+				<img data-clue="18" src="/Content/images/cells/18.png" class="item item10">
+				<img data-clue="19-b" src="/Content/images/cells/19-b.png" class="item item9">
+				<img data-clue="24" src="/Content/images/cells/24.png" class="item item8">
+				<img data-clue="25" src="/Content/images/cells/25.png" class="item item7">
+				<img data-clue="30" src="/Content/images/cells/30.png" class="item item6">
+				<img data-clue="31" src="/Content/images/cells/31.png" class="item item5">
+				<img data-clue="39" src="/Content/images/cells/39.png" class="item item4">
+				<img data-clue="41" src="/Content/images/cells/41.png" class="item item3">
+				<img data-clue="43" src="/Content/images/cells/43.png" class="item item2">
+				<img data-clue="50" src="/Content/images/cells/50.png" class="item item1">
+			</div>
+		</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="/Scripts/custom/serverAPI.js"></script>
+	<script src="/Content/Games/js/jquery.glow.js"></script>
+	<script src="/Content/Games/js/jquery.easyaudioeffects.1.0.0.min.js"></script>
+    <script src="/Content/Games/js/pxloader.js"></script>
+
+    <script>
+		var loader = new PxLoader(), 
+		    // backgroundImg = loader.addImage('/Content/images/bg.jpg'), 
+		    // gamebg = loader.addImage('/Content/images/mastermind-bg.jpg'), 
+		    // logo = loader.addImage('/Content/images/cosmoplay.png'), 
+		    // gameImg1 = loader.addImage('/Content/images/remove.png'),
+		    // gameImg2 = loader.addImage('/Content/images/mastermind/card1.png'),
+		    // gameImg3 = loader.addImage('/Content/images/mastermind/card2.png'),
+		    // gameImg4 = loader.addImage('/Content/images/mastermind/card3.png'),
+		    // gameImg5 = loader.addImage('/Content/images/mastermind/card4.png'),
+		    // gameImg6 = loader.addImage('/Content/images/mastermind/card5.png'),
+		    // gameImg7 = loader.addImage('/Content/images/mastermind/card6.png'),
+		    // gameImg8 = loader.addImage('/Content/images/mastermind/x.png'),
+		    audio1 = loader.addAudio('/Content/music/loop.mp3'),
+		    audio3 = loader.addAudio('/Content/music/unlock.mp3');
+		 
+    </script>
+
+    <script>
+            // Init
+        window.unlockCode = atob('@(WebGames.Helpers.Base64Helper.GetBase64("990"))');
+
+        window.customGameKey = '@WebGames.Libs.GameKeys.Escape_3';
+
+        var RemainingTime = @Model.RemainingTime;
+        var GameScore = @Model.GameScore;
+        @if(Model.IsDemo) {
+            @:var isDemo = true;
+        }
+        else {
+            @:var isDemo = false;
+        }
+    </script>
+
+    <script src="/Content/Games/js/cell.init.js"></script>
+</div>

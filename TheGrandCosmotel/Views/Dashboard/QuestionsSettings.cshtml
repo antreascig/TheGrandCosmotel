@@ -1,0 +1,286 @@
+﻿@using Microsoft.AspNet.Identity
+@using WebGames.Helpers
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Cosmoplay | Admin </title>
+
+    <!-- Bootstrap -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet">
+    <!-- Datatable-->
+    <link href="~/Content/dataTables.bootstrap.min.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="~/Content/DashBoard/css/custom.min.css" rel="stylesheet">
+
+    @*<link href="~/Content/pnotify.css" media="all" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="~/Scripts/pnotify.js"></script>*@
+
+</head>
+
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="/Dashboard/Index" class="site_title"><i class="fa fa-cog"></i> <span>Cosmoplay!</span></a>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <br />
+
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3>Admin Dashboard</h3>
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a href="/Dashboard/Index"><span><i class="fa fa-home"></i> Κεντρική </span></a>
+                                </li>
+
+                                <li>
+                                    <a href="/Dashboard/Users"><span><i class="fa fa-users" aria-hidden="true"></i> Χρήστες </span></a>
+                                </li>
+
+                                <li>
+                                    <a href="/Dashboard/Scores"><span><i class="fa fa-bar-chart-o"></i> Σκορ </span></a>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-edit"></i> Ρυθμίσεις παιχνιδιών <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" style="display: block;">
+                                        <li><a href="/Dashboard/GeneralSettings">Γενικές</a></li>
+                                        <li class="active"><a href="/Dashboard/QuestionsSettings">Κλειδιά</a></li>
+                                        <li><a href="/Dashboard/GroupsSettings">Ομάδες</a></li>
+                                        <li><a href="/Dashboard/Schedule">Πρόγραμμα Παιχνιδιών</a></li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /sidebar menu -->
+                </div>
+            </div>
+
+
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <nav class="" role="navigation">
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    @User.Identity.GetUserName()
+                                    <span class=" fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                    <!--<li><a href="javascript:;"> Profile</a></li>-->
+                                    <li><a href="/Dashboard/LogOff"><i class="fa fa-sign-out pull-right"></i> Αποσύνδεση</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div class="right_col" role="main">
+
+                <!-- Questions Game-->
+
+                <div class="row">
+
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>ΚΛΕΙΔΙΑ: Ερωτήσεις</h2>
+
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li>
+                                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    @*<li>
+                                            <a class="" data-bind="click: RefreshGames"><i class="fa fa-refresh"></i></a>
+                                        </li>*@
+                                </ul>
+
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content bs-example-popovers">
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#questionEditorModal" data-bind="click: AddQuestion">Πρόσθεσε Ερώτηση</button>
+                                <button class="btn btn-primary" data-bind="click: SaveQuestions">Αποθήκευση</button>
+
+                                <div class="clearfix"></div>
+                                <br>
+                                <table id="datatable-questions" class="table table-striped table-bordered" style="width:100%!important"></table>
+
+                                @*<table id="datatable-buttons" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Ερώτηση</th>
+                                                <th>Ρυθμίσεις</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- ko foreach: GameQuestions -->
+                                            <tr>
+                                                <td data-bind="text: QuestionId()"></td>
+                                                <td data-bind="text: QuestionText"></td>
+                                                <td>
+                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#questionEditorModal" data-bind="click: $root.EditQuestion.bind($root, $data)">Αλλαγή</button>
+                                                    <button type="button" class="btn btn-danger" data-bind="click: $root.RemoveQuestion.bind($root, QuestionId)">Διαγραφή</button>
+                                                </td>
+                                            </tr>
+                                            <!-- /ko -->
+                                            <!-- ko if: (GameQuestions() || []).length == 0  -->
+                                            <tr>
+                                                <td colspan="3">
+                                                    <br>
+                                                    <p class="text-center">Δεν υπάρχουν ακόμη ερωτήσεις</p>
+                                                </td>
+                                            </tr>
+                                            <!-- /ko -->
+
+                                        </tbody>
+                                    </table>*@
+
+                                <div class="modal fade" id="questionEditorModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                                <h4 class="modal-title" id="myModalLabel">Ερώτηση</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- ko if: SelectedQuestion() != null -->
+                                                <div data-bind="with: SelectedQuestion">
+                                                    <form>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-4 col-sm-4 col-xs-12" for="question-text">Text<span class="required">*</span></label>
+                                                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                                                <textarea id="question-text" required="required" class="form-control" data-bind="value: QuestionText" style="max-width: 100%"> </textarea>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+                                                    <hr>
+
+                                                    <div class="row">
+                                                        <label class="col-sm-3 control-label">Options*</label>
+
+                                                        <div class="col-sm-9">
+                                                            <div class="input-group">
+                                                                <span class="input-group-btn">
+                                                                    <button type="button" class="btn btn-primary" data-bind="click: $root.AddOption">Πρόσθεσε Επιλογή</button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- ko foreach: Options -->
+                                                    <div class="row">
+                                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                                            <textarea id="question-text" required="required" class="form-control" data-bind="value: $data" style="max-width: 100%"> </textarea>
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-2 col-xs-6">
+                                                            <div class="radio">
+
+                                                                <div class="radio">
+                                                                    <label>
+                                                                        <input type="radio" name="answerRadios" data-bind="value: ($index() + 1), checked: $parent.AnswerIndex ">
+                                                                        Σωστή Απάντηση
+                                                                    </label>
+
+                                                                    <!--<label class="">
+                                                                      <div class="iradio_flat-green" style="position: relative;" data-bind="css: {'checked': $index() == $parent.AnswerIndex () }">
+                                                                        <input type="radio" class="flat" name="answerRadios" style="position: absolute; opacity: 0;" data-bind="value: $index(), checked: $parent.AnswerIndex ">
+                                                                        <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                                                                      </div> Correct Answer
+                                                                    </label>-->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-2 col-xs-6">
+                                                            <button type="button" class="btn btn-default" data-bind="click: $root.RemoveOption.bind($root, $index())"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                    <br>
+                                                    <!-- /ko -->
+                                                </div>
+                                                <!-- /ko -->
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal" data-bind="click: CancelQuestion" style="margin-bottom: 0px;">Ακύρωση</button>
+                                                <button type="button" class="btn btn-success" data-bind="click: SaveQuestion">OK</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
+    <script src="~/Scripts/knockout-mapping.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!-- Datatables -->
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/dataTables.bootstrap.min.js"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="~/Content/DashBoard/js/custom.js"></script>
+    <script src="~/Content/DashBoard/js/viewmodels/questionssettings.js"></script>
+
+</body>
+
+</html>

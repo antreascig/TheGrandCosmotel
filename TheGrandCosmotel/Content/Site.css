@@ -1,0 +1,1022 @@
+﻿
+@font-face {
+    font-family: 'GFS';
+    src: url('fonts/GFSTheokritos-Regular.eot');
+    src: url('fonts/GFSTheokritos-Regular.eot?#iefix') format('embedded-opentype'),url('fonts/GFSTheokritos-Regular.woff') format('woff'),url('fonts/GFSTheokritos-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal
+}
+
+.navbar.navbar-inverse {
+    background: rgba(244,239,199,.57);
+    border: none;
+    background-image: url(https://cosmoplay.gr/Content/images/cosmotelogo.png) !important;
+    background-repeat: no-repeat;
+    background-size: 56px 49px;
+    background-position: 5px;
+	z-index: 10;
+} 
+
+.navbar-collapse {
+    padding-top: 0!important;
+}
+.navbar a {
+    font-family: 'Open Sans';
+    font-weight: bold;
+    color: #fff!important
+}
+
+body {
+    height: 100vh
+}
+
+.user_index {
+    background: #000 url(https://amusegr.eu/images/main-bg.jpg?v=2) top center no-repeat
+}
+
+.home_index .navbar-inverse .navbar-nav>li>a,.home_index .mails a,.home_index .mails p,.home_info .navbar-inverse .navbar-nav>li>a,.home_info .mails a,.home_info .mails p,.home_index .navbar-inverse .navbar-nav>li>a,.home_index .mails a,.home_index .mails p {
+    color: #000!important
+}
+
+.games_activegamemap .body-content {
+    color: #fff;
+    text-align: center!important;
+    padding-top: 350px!important;
+    margin: 0 auto!important;
+    font-size: 30px;
+    font-family: 'Open Sans';
+    font-weight: bold
+}
+
+.account_register .form-horizontal {
+    background: transparent url(images/regform.png?v=3) top center no-repeat
+}
+
+.account_register h2,.account_register h4 {
+    display: none
+}
+
+.account_confirmemail .container.body-content {
+    text-align: center;
+    color: #fff;
+    padding-top: 360px
+}
+
+.account_confirmemail h2 {
+    font-family: 'GFS';
+    text-shadow: 0 2px 2px black
+}
+
+.account_confirmemail a {
+    color: #fff;
+    text-decoration: underline
+}
+
+.nav.navbar-nav {
+    display: none
+}
+
+.nav.navbar-nav.navbar-right {
+    display: block
+}
+
+.account_login .navbar-right,.account_register .navbar-right {
+    display: none;
+    opacity: 0
+}
+
+.account_register label {
+}
+
+.account_login h2 {
+    display: none
+}
+
+.account_register form {
+    display: block;
+    padding-left: 400px;
+    padding-right: 155px;
+    padding-top: 100px;
+    box-sizing: border-box;
+    width: 1178px;
+    margin-left: -130px
+}
+
+.account_register .form-control {
+    border-radius: 0;
+    border: 2px solid #cc2536;
+    padding: 10px;
+    height: 55px;
+    font-family: 'GFS';
+    font-size: 18px
+}
+
+#MaritalStatus {
+    border-radius: 0;
+    border: 2px solid #cc2536;
+    padding: 10px;
+    height: 55px;
+    font-family: 'GFS';
+    font-size: 18px;
+    width: 100%
+}
+
+.account_register .col-md-10 {
+    width: 100%
+}
+
+#loginForm {
+    width: 400px;
+    padding-top: 240px;
+    margin: 0 auto;
+	padding-bottom:80px
+}
+
+#loginForm h4 {
+    display: none
+}
+
+#loginForm .col-md-2,#loginForm .col-md-10 {
+    width: 100%;
+    text-align: left;
+    float: none;
+    margin-right: none
+}
+
+#loginForm .form-group {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin: 0
+}
+
+.account_register .form-group:nth-last-child(2) {
+    background: #0b4159;
+    padding: 10px 10px 10px 10px;
+    width: 621px;
+    text-align: center;
+    margin-left: 0
+}
+
+.account_register .form-group:nth-last-child(2) .col-md-3.col-sm-3.col-xs-12 {
+    width: auto!important
+}
+
+.account_register .form-group:nth-last-child(2):before {
+    display: block;
+    content: "διαλεξε τον αρτιστα που σου ταιριαζει:";
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+    font-family: 'GFS';
+    font-size: 20px
+}
+
+#loginForm p {
+    text-align: center;
+    padding-top: 10px
+}
+
+#loginForm p a {
+    color: #fff
+}
+
+#loginForm .btn {
+    background: transparent url(images/loginbtn.png) top center no-repeat;
+    width: 254px;
+    height: 143px;
+    font-size: 0;
+    margin-left: 56px;
+    border: none;
+    -webkit-filter: drop-shadow(5px 5px 5px #222);
+    filter: drop-shadow(5px 5px 5px #222);
+    transition: all ease .2s
+}
+
+#loginForm .btn:hover {
+    transform: translateY(-10px)
+}
+
+#loginForm .checkbox input[type="checkbox"] {
+    margin-left: 0;
+    width: 25px;
+    height: 25px
+}
+
+#loginForm .checkbox label {
+    display: block;
+    padding-top: 7px;
+    padding-left: 33px;
+    padding-bottom: 15px;
+    color: #fff
+}
+
+#loginForm .col-md-offset-2.col-md-10 {
+    margin-left: 0;
+    width: 100%
+}
+
+.account_login .col-md-8 {
+    width: 100%
+}
+
+#loginForm .form-control {
+    padding: 15px!important;
+    height: 50px
+}
+
+.jumbotron {
+    background: none;
+    text-align: center
+}
+
+.jumbotron h1 {
+    display: none
+}
+
+.container hr {
+    display: none!impotant;
+    width: 0
+}
+
+.jumbotron .btn {
+    background: transparent url(https://amusegr.eu/images/startbtn.png) top center no-repeat;
+    width: 254px;
+    height: 143px;
+    font-size: 0;
+    border: none;
+    -webkit-filter: drop-shadow(5px 5px 5px #222);
+    filter: drop-shadow(5px 5px 5px #222);
+    margin-top: 450px;
+    transition: all ease .2s
+}
+
+.jumbotron .btn:hover {
+    transform: translateY(-10px)
+}
+
+.account_register input[type="submit"] {
+    background: transparent url(images/registerbtn.png) top center no-repeat;
+    width: 198px;
+    height: 121px;
+    font-size: 0;
+    float: right;
+    display: block;
+    box-sizing: border-box;
+    padding: 10px;
+    position: relative;
+    margin-right: 105px;
+    border: none;
+    -webkit-filter: drop-shadow(5px 5px 5px #222);
+    filter: drop-shadow(5px 5px 5px #222);
+    transition: all ease .2s;
+    z-index: 100
+}
+
+.account_register input[type="submit"]:hover {
+    transform: translateY(-10px)!important;
+    cursor: pointer
+}
+
+#__AjaxAntiForgeryForm {
+    padding: 0
+}
+
+.avatar {
+    display: block
+}
+
+.account_register label {
+    font-family: 'GFS';
+    font-size: 24px;
+    font-weight: normal;
+    color: #1479a5;
+    display: block
+}
+
+label.STRONGMAN,label.ACROBAT,label.MAGICIAN,label.KOMPER {
+    cursor: pointer!important
+}
+
+.col-md-3:hover label.STRONGMAN:after,.col-md-3:hover label.ACROBAT:after,.col-md-3:hover label.MAGICIAN:after,.col-md-3:hover label.KOMPER:after {
+    color: #ffcf27
+}
+
+input[type="radio"]:checked+label {
+    color: #ffcf27
+}
+
+#UserName {
+    margin-bottom: 15px
+}
+
+.account_register .container.body-content {
+    width: 100%!important
+}
+
+.account_forgotpassword form {
+    width: 400px;
+    margin: 0 auto
+}
+
+.account_forgotpassword form input {
+    width: 100%;
+    height: 50px
+}
+
+.account_forgotpasswordconfirmation .body-content {
+    padding-top: 350px;
+    text-align: center;
+    color: #fff
+}
+
+.account_forgotpasswordconfirmation .body-content p {
+    padding-bottom: 80px
+}
+
+.account_forgotpassword h2,.account_forgotpasswordconfirmation h1 {
+    color: #fff;
+    font-family: 'Open Sans';
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 0 0 10px black,0 4px 0 rgba(0,0,0,.5)
+}
+
+.account_forgotpassword .btn {
+    font-weight: bold;
+    font-size: 0;
+    height: 70px;
+    text-transform: uppercase;
+    background: transparent url(../images/passreminder.png) center center no-repeat;
+    border: none;
+    transition: all ease .2s
+}
+
+.account_forgotpassword .btn:hover {
+    transform: translateY(-4px)
+}
+
+.navbar-nav li img {
+    display: inline-block;
+    height: 50px
+}
+
+.navbar-collapse {
+    padding-top: 10px
+}
+
+.avatar .form-control {
+    height: 0
+}
+
+.validation-summary-errors {
+    background-color: #0b4159
+}
+
+.validation-summary-errors ul {
+    padding: 0;
+    margin: 0;
+    list-style: none
+}
+
+.validation-summary-errors li {
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 10px
+}
+
+.LayoutInfo {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    font-family: 'GFS';
+    color: #fff;
+    padding-top: 460px;
+    text-shadow: 0 2px 2px black
+}
+
+footer .text-danger {
+    text-align: center;
+    color: #fff
+}
+
+.games_activeexplainer .container,.games_activegame .container,.games_activegamemap .container {
+    width: 100%;
+    padding: 0;
+    margin: 0
+}
+
+.games_activegameafter .navbar,.games_activeexplainer .navbar,.games_activegame .navbar,.games_activegamemap .navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 51px
+}
+
+.games_activegameafter .navbar .container,.games_activeexplainer .navbar .container,.games_activegame .navbar .container,.games_activegamemap .navbar .container {
+    max-width: 960px;
+    margin: 0 auto
+}
+
+.games_activeexplainer footer,.games_activegame footer {
+    display: none
+}
+
+.games_activeexplainer hr,.games_activegame hr,.games_activegamemap hr {
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: -1px 0 0 0
+}
+
+.user_index h2 {
+    color: #000;
+    font-size: 30px;
+    font-family: 'Open Sans';
+    font-weight: bold
+}
+
+.user_index table {
+    box-shadow: 0 0 80px #b42038,0 0 80px #b42038;
+    border: 3px solid #b42038
+}
+
+.user_index td {
+    padding: 22px 15px!important
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td,.table-striped>tbody>tr:nth-child(odd)>th {
+    background-color: rgba(0,0,0,.8);
+    color: #fff;
+    border: none
+}
+
+.table-striped>tbody>tr:nth-child(even)>td,.table-striped>tbody>tr:nth-child(odd)>th {
+    background-color: rgba(0,0,0,.6);
+    color: #fff;
+    border: none
+}
+
+.user_index thead {
+    color: #fff;
+    font-family: 'Open Sans';
+    font-weight: bold;
+    background: #b42038
+}
+
+.user_index thead th {
+    height: 45px;
+    padding-left: 15px!important
+}
+
+.account_register .navbar-nav {
+    float: right
+}
+
+.home_info .container {
+    text-align: center
+}
+
+footer {
+    text-align: center;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    left: 0px;
+    background: rgba(244,239,199,.95);
+    padding: 2px
+}
+
+footer img {
+    max-width: 180px;
+    vertical-align: middle;
+    display: inline-block
+}
+
+footer .mails {
+    padding: 17px 0 0 10px;
+    font-size: 12px;
+    display: inline-block
+}
+
+footer .mails p {
+    display: inline;
+    color: #aaa;
+    padding: 0 2px
+}
+
+footer .mails a {
+    vertical-align: middle;
+    padding-right: 3px;
+    color: #d5d5d5
+}
+
+.navbar-nav>li>a {
+    font-size: 15px;
+    display: inline-block
+}
+
+.games_activegameafter .container {
+    width: 100%;
+    margin: 0;
+    padding: 0
+}
+
+.games_activegameafter footer {
+    position: absolute;
+    bottom: 0;
+    padding: 25px
+}
+
+.games_activegameafter {
+    color: #fff
+}
+
+.account_forgotpassword .body-content {
+    color: #fff;
+    text-align: center;
+    padding-top: 350px;
+    text-shadow: 0 0 5px black
+}
+
+.account_forgotpassword h1 {
+    font-family: 'GFS'
+}
+
+.games_activegameafter h1 {
+    font-family: 'Open Sans';
+    font-weight: bold;
+    font-size: 36px
+}
+
+.games_activegameafter p {
+    font-size: 16px
+}
+
+.games_activegameafter hr {
+    display: none
+}
+
+.demo_index .body-content {
+    width: 100%;
+    max-width: 2560px;
+    padding: 0;
+    margin: 0
+}
+
+.demo_index footer,.demo_mastermind footer,.demo_questions footer,.demo_juggler footer,.demo_adespotabalakia footer,.demo_whackamole footer,.demo_activegameafter footer,.demo_escape_1 footer {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 96%;
+    margin: 0 auto;
+    box-sizing: border-box;
+	display:none
+}
+
+.demo_index .body-content,.demo_mastermind .body-content,.demo_questions .body-content,.demo_juggler .body-content,.demo_adespotabalakia .body-content,.demo_whackamole .body-content,.demo_activegameafter .body-content,.demo_escape_1 .body-content {
+    width: 100%;
+    max-width: 2560px
+}
+
+.demo_activegameafter .body-content .screen {
+    color: #fff;
+    font-family: 'GFS';
+    font-size: 36px
+}
+
+.demo_index .screen a {
+    display: block;
+    position: relative;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 20px;
+    transition: all ease .2s
+}
+
+.demo_index .screen {
+    padding-top: 150px
+}
+
+.body-content {
+    width: 100%;
+    max-width: 960px;
+    padding: 0;
+    margin: 0 auto;
+}
+
+.games_activegame .body-content,.games_activegameafter .body-content,.games_activeexplainer .body-content {
+    max-width: 100%
+}
+
+.avatar .STRONGMAN:before {
+    margin: 0 auto;
+    content: '';
+    display: block;
+    width: 70px;
+    height: 70px;
+    background: url(/Content/STRONGMAN.png) no-repeat center center;
+    background-size: 58px 54px;
+    opacity: .4
+}
+
+.avatar .ACROBAT:before {
+    margin: 0 auto;
+    content: '';
+    display: block;
+    width: 70px;
+    height: 70px;
+    background: url(/Content/ACROBAT.png) no-repeat center center;
+    background-size: 70px 58px;
+    opacity: .4
+}
+
+.avatar .MAGICIAN:before {
+    margin: 0 auto;
+    content: '';
+    display: block;
+    width: 100px;
+    height: 70px;
+    background: url(/Content/MAGICIAN.png) no-repeat;
+    background-position: 12px 8px;
+    background-size: 100px 75px;
+    opacity: .4
+}
+
+.avatar .KOMPER:before {
+    margin: 0 auto;
+    content: '';
+    display: block;
+    width: 100px;
+    height: 70px;
+    background: url(/Content/KOMPER.png) no-repeat center center;
+    background-position: 22px 5px;
+    background-size: 85px 58px;
+    opacity: .4
+}
+
+input[type="radio"]:checked+label:before {
+    opacity: 1
+}
+
+.mobile #c2canvasdiv {
+}
+
+.mobile #c2canvas {
+}
+
+.mobile .navbar,.mobile footer {
+    display: none
+}
+
+.desktop #c2canvasdiv {
+    margin-left: auto!important;
+    margin-right: auto!important
+}
+
+.desktop #c2canvas {
+}
+
+@media screen and (max-width: 736px) {
+    .mobile .wrapper {
+        padding:0!important
+    }
+
+    .game.master,.game.mole {
+        transform: scale(.76);
+        transform-origin: 0 0
+    }
+
+    .navbar,.container footer {
+        display: none
+    }
+}
+
+@media screen and (max-width: 667px) {
+    .mobile .wrapper {
+        padding:0!important
+    }
+
+    .game.master,.game.mole {
+        transform: scale(.69);
+        transform-origin: 0 0
+    }
+
+    .navbar,.container footer {
+        display: none
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .mobile .wrapper {
+        padding:0!important
+    }
+
+    .game.master,.game.mole {
+        transform: scale(.66);
+        transform-origin: 0 0
+    }
+
+    .navbar,.container footer {
+        display: none
+    }
+}
+
+@media screen and (max-width: 568px) {
+    .mobile .wrapper {
+        padding:0!important
+    }
+
+    .game.master,.game.mole {
+        transform: scale(.59);
+        transform-origin: 0 0
+    }
+
+    .navbar,.container footer {
+        display: none
+    }
+}
+
+.demo_index .row {
+    text-align: center!important;
+    margin: 0
+}
+
+.demo_index .row .col-md-3 {
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+    text-align: center
+}
+
+.demo_index .row .col-md-3 a {
+    width: 100%;
+    display: block;
+    text-align: center
+}
+
+.account_login .error-page h1 {
+    display: none
+}
+
+.account_login .error-page h2 {
+    display: block;
+    color: #fff;
+    text-align: center;
+    padding-top: 350px;
+    padding-bottom: 150px;
+    text-shadow: 0 2px 3px black
+}
+
+@media screen and (max-width: 768px) {
+    .navbar-right li img {
+        display:none
+    }
+
+    .navbar-nav>li {
+        padding-left: 0!important;
+        padding-right: 0!important
+    }
+
+    .navbar-nav>li>a {
+        padding-left: 8px;
+        padding-right: 8px
+    }
+
+    .navbar-collapse {
+        transform: translateY(-50px)
+    }
+}
+
+.navbar-inverse .navbar-toggle:hover,.navbar-inverse .navbar-toggle:focus {
+    background-color: transparent
+}
+
+.navbar-inverse .navbar-toggle {
+    border-color: transparent;
+    z-index: 100
+}
+
+.navbar-collapse {
+    padding-left: 30px;
+    background: transparent
+}
+
+.navbar-collapse li {
+    padding: 5px 10px
+}
+
+.games_activegamemap {
+    background: url('/Content/images/bg.jpg') no-repeat center center;
+    background-size: cover
+}
+
+.account_login,.user_index,.account_forgotpasswordconfirmation,.account_forgotpassword,.home_index,.home_info,.account_confirmemail,.account_register,.account_resetpassword,.account_resetpasswordconfirmation,.home_tnc {
+    background: #c5b186 url(https://cosmoplay.gr/Content/images/newbg.jpg) top center no-repeat;
+	background-position-y: -94px
+}
+
+.account_login .navbar a,.account_forgotpasswordconfirmation .navbar a,.user_index .navbar a,.account_forgotpassword .navbar a,.home_index .navbar a,.home_info .navbar a,.account_confirmemail .navbar a,.account_register .navbar a,.account_resetpassword .navbar a,.account_resetpasswordconfirmation .navbar a,.home_tnc .navbar a {
+    font-family: 'Open Sans';
+    font-weight: bold;
+    color: #000!important
+}
+
+.account_login footer .mails a,.account_forgotpasswordconfirmation footer .mails a,.account_forgotpassword footer .mails a,.home_index footer .mails a,.home_info footer .mails a,.account_confirmemail footer .mails a,.account_register footer .mails a,.account_resetpassword footer .mails a,.account_resetpasswordconfirmation footer .mails a,.home_tnc footer .mails a {
+    vertical-align: middle;
+    padding-right: 3px;
+    color: #000;
+    text-shadow: none
+}
+
+.account_login footer .mails p,.account_forgotpasswordconfirmation footer .mails p,.account_forgotpassword footer .mails p,.home_index footer .mails p,.home_info footer .mails p,.account_confirmemail footer .mails p,.account_register footer .mails p,.account_resetpassword footer .mails p,.account_resetpasswordconfirmation footer .mails p,.home_tnc footer .mails p {
+    vertical-align: middle;
+    padding-right: 3px;
+    color: #000;
+    text-shadow: none
+}
+
+.account_resetpassword,.account_resetpasswordconfirmation {
+    padding-top: 350px;
+    font-family: 'GFS';
+    text-shadow: 0 0 2px black
+}
+
+.account_resetpassword h2,.account_resetpasswordconfirmation {
+    text-align: center;
+    color: #fff
+}
+
+.account_resetpasswordconfirmation .body-content>div>p {
+    font-size: 18px;
+    padding-bottom: 50px
+}
+
+.account_resetpasswordconfirmation .body-content>div>p a {
+    color: #fff;
+    text-decoration: underline
+}
+
+.account_resetpassword .form-horizontal {
+    max-width: 480px;
+    margin: 0 auto
+}
+
+.account_resetpassword .form-horizontal input {
+    height: 50px
+}
+
+.account_resetpassword #UserName {
+    margin-bottom: 0
+}
+
+.account_resetpassword .btn {
+    width: 100%;
+    background-color: #40ae49;
+    color: #fff;
+    font-size: 26px
+}
+
+.paper {
+    background: #f1f1ef url(/Content/images/paper.jpg);
+    background-size: inherit;
+    color: #000;
+    box-sizing: border-box;
+    padding: 15px 45px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 20px rgba(0,0,0,.3)
+}
+
+.home_info .paper {
+    padding: 45px 45px
+}
+
+.account_forgotpassword .navbar,.games_activegamemap .navbar,.account_login .navbar,.home_index .navbar,.home_tnc .navbar,.home_info .navbar,.user_index .navbar {
+    display: block
+}
+
+@media screen and (max-width: 768px) {
+    .navbar-collapse {
+        position:absolute!important;
+        z-index: 2;
+        background: rgba(0,0,0,.8);
+        width: 100%
+    }
+
+    .container .navbar-collapse .navbar-nav>li>a {
+        color: #fff!important
+    }
+    html {
+        background:black;
+    }
+}
+
+#cosmologo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    #cosmologo {
+        display:none
+    }
+}
+
+
+
+
+@media(min-width: 768px) {
+ .account_login #otelogo,
+.user_index #otelogo,
+.account_forgotpasswordconfirmation #otelogo,
+.account_forgotpassword #otelogo,
+.home_index #otelogo,
+.home_info #otelogo,
+.account_confirmemail #otelogo,
+.account_register #otelogo,
+.account_resetpassword #otelogo,
+.account_resetpasswordconfirmation #otelogo,
+.home_tnc #otelogo {
+    display: block!important;
+}
+#otelogo {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 10;
+    width: 94px;
+}
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px
+    }
+}
+
+li.mobileOnly {
+    display:none;
+}
+
+.collapse.in li.mobileOnly {
+    display:block;
+}
+
+.account_login .body-content,
+.user_index .body-content,
+.account_forgotpasswordconfirmation .body-content,
+.account_forgotpassword .body-content,
+.home_index .body-content,
+.home_info .body-content,
+.account_confirmemail .body-content,
+.account_register .body-content,
+.account_resetpassword .body-content,
+.account_resetpasswordconfirmation .body-content,
+.home_tnc .body-content {
+    position:relative;
+}
+
+.user_index .body-content {
+    padding-bottom: 50px;
+}
+
+
+/* Gamaw ws designer */
+
+.home_index {
+    color: #fff;
+}
+
+    .home_index .body-content {
+        height: 80%;
+        line-height: 80%;
+        max-width: 100%;
+    }
+
+    .home_index .wrapper {
+        vertical-align: middle;
+        line-height: 1.5;
+        margin-top: 300px;
+    }
+
+        .home_index .wrapper .messageoftheday {
+            margin: 0 auto;
+            text-shadow: 0 2px 2px black;
+            text-align: center;
+            max-width: 880px;
+        }
+
+.home_index h1 {
+    font-family: 'Open Sans';
+    font-weight: bold;
+    font-size: 36px;
+}
+
+.home_index p {
+    font-size: 16px
+}

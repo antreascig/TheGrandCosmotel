@@ -1,0 +1,120 @@
+﻿@model WebGames.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="@Url.Content("~/Scripts/custom/views/register.js")"></script>
+}
+<script>
+    window.location = 'https://www.cosmoplay.gr/Account/Login';
+</script>
+
+<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Create a new account.</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @* UserName *@
+        <div class="col-md-12">
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.UserName) })
+        </div>
+    </div>
+    <div class="form-group">
+        @* Password *@
+        <div class="col-md-6 col-xs-6 col-sm-6">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.Password) })
+        </div>
+        @* Confirm Password *@
+        <div class="col-md-6 col-xs-6 col-sm-6">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.ConfirmPassword) })
+        </div>
+    </div>
+    @* FullName *@
+    <div class="form-group">
+        <div class="col-md-12">
+            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", placeholder = "Ονοματεπώνυμο ( με Ελληνικούς χαρακτήρες )" })
+        </div>
+    </div>
+
+    @* Email *@
+    <div class="form-group">
+        <div class="col-md-12">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.Email) })
+        </div>
+    </div>
+
+    @* Shop *@
+    <div class="form-group">
+        <div class="col-md-12">
+            @Html.TextBoxFor(m => m.Shop, new { @class = "form-control", placeholder = "Κατάστημα (Συμπληρώστε Τ.Ε.Κ.)" })
+        </div>
+    </div>
+
+    @* MaritalStatus *@
+    <div class="form-group">
+        <div class="col-md-12">
+            @Html.DropDownListFor(
+           model => model.MaritalStatus,
+           new SelectList(new List<string> { "Ελεύθερος/η", "Παντρεμενενος/η" })
+        )
+        </div>
+    </div>
+
+    @* Hobby *@
+    <div class="form-group">
+        <div class="col-md-12">
+            @Html.TextAreaFor(m => m.Hobby, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.Hobby) })
+        </div>
+    </div>
+
+    @* Avatar *@
+    <div class="form-group">
+        <div class="col-md-12">
+            <div class="row">
+
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <label class="avatar">
+                        <input name="Avatar" class="form-control" id="Avatar1" type="radio" checked="checked" value="strongman">
+                        <label for="Avatar1" class="STRONGMAN">STRONGMAN</label>
+                    </label>
+                </div>
+
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <label class="avatar">
+                        <input name="Avatar" class="form-control" id="Avatar2" type="radio" value="acrobat">
+                        <label for="Avatar2" class="ACROBAT">ACROBAT</label>
+                    </label>
+                </div>
+
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <label class="avatar">
+                        <input name="Avatar" class="form-control" id="Avatar3" type="radio" value="magician">
+                        <label for="Avatar3" class="MAGICIAN">MAGICIAN</label>
+                    </label>
+                </div>
+
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <label class="avatar">
+                        <input name="Avatar" class="form-control" id="Avatar4" type="radio" value="komper">
+                        <label for="Avatar4" class="KOMPER">KOMPER</label>
+                    </label>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-12">
+            <input type="submit" class="btn btn-default" value="Register" />
+        </div>
+    </div>
+}
