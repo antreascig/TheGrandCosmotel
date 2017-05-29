@@ -502,17 +502,16 @@ namespace WebGames.Controllers
 
                             UserManager.SendEmail(user.Id, "Αποστολή Στοιχείων Demo Παίκτη", 
                                 $"<p>Το <b>Username<b> σας είναι: <i>{model.UserName}</i> </p> <p>Ο <b>Κωδικός</b> σας είναι: <i>{password}</i>.</p>");
+
+                            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
                         }
                     }
                     // Fix errors
                     List<string> fixedErrors = ErrorMessageHelper.FixErrors(result.Errors);
 
                     AddErrors(new IdentityResult(fixedErrors));
-
-                    return Json(new { success = true }, JsonRequestBehavior.AllowGet);
-
                 }
-                return Json(new { success = false, model = model }, JsonRequestBehavior.AllowGet);
+                return Json(new { success = false, ModelState = ModelState.ToDictionary(k => k.Key, v=> v.Value.Errors.Select(e => e.ErrorMessage )) }, JsonRequestBehavior.AllowGet);
             }
             catch(Exception exc)
             {
