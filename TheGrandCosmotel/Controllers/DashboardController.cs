@@ -473,6 +473,55 @@ namespace WebGames.Controllers
             return DataTablesResult.Create<UserGroupVM>(ranked_groups, dataTableParam);
         }
 
+        [Authorize(Roles = "sysadmin,admin")]
+        public ActionResult AddDemoPlayer(DemoRegisterViewModel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var user = new ApplicationUser
+                    {
+                        UserName = model.UserName,
+                        FullName = model.FullName,
+                        Email = model.Email,
+                        EmailConfirmed = true
+                    };
+
+                    var password = System.Web.Security.Membership.GeneratePassword(8, 0);
+
+                    IdentityResult result = UserManager.Create(user, password);
+
+                    if (result.Succeeded)
+                    {
+                        result = UserManager.AddToRole(user.Id, "demo");
+                        if (result.Succeeded)
+                        {
+                            //  Comment the following line to prevent log in until the user is confirmed.
+                            //  await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
+                            UserManager.SendEmail(user.Id, "Αποστολή Στοιχείων Demo Παίκτη", 
+                                $"<p>Το <b>Username<b> σας είναι: <i>{model.UserName}</i> </p> <p>Ο <b>Κωδικός</b> σας είναι: <i>{password}</i>.</p>");
+                        }
+                    }
+                    // Fix errors
+                    List<string> fixedErrors = ErrorMessageHelper.FixErrors(result.Errors);
+
+                    AddErrors(new IdentityResult(fixedErrors));
+
+                    return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+
+                }
+                return Json(new { success = false, model = model }, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception exc)
+            {
+                Logger.Log(exc);
+                return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
         // HELPERS
 
         private void AddErrors(IdentityResult result)

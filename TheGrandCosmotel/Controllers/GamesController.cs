@@ -9,7 +9,7 @@ using WebGames.Libs.Games;
 
 namespace WebGames.Controllers
 {
-    [Authorize(Roles = "player")]
+    [Authorize(Roles = "player,demo")]
     public class GamesController : Controller
     {
         #region Views

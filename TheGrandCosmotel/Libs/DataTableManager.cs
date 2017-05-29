@@ -11,6 +11,7 @@ namespace WebGames.Libs
     public class UserDTModel
     {
         public string Id { get; set; }
+        public string Roles { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string UserName { get; set; }
@@ -26,9 +27,14 @@ namespace WebGames.Libs
             {
                 using (var db = ApplicationDbContext.Create())
                 {
-                    var RoleId = (from role in db.Roles where role.Name == "player" select role).SingleOrDefault().Id;
+                    var RoleIdsDict = (from role in db.Roles where role.Name == "player" || role.Name == "demo" select role).ToList().ToDictionary(k => k.Name, v => v.Id);
+
+                    var playerId = RoleIdsDict.ContainsKey("player") ? RoleIdsDict["player"] : "NOT_FOUND";
+
+                    var demoId = RoleIdsDict.ContainsKey("demo") ? RoleIdsDict["demo"] : "NOT_FOUND";
+
                     var searchValue = dataTableParam.sSearch ?? "";
-                    var q = db.Users.Where(u => u.Roles.Select(y => y.RoleId).Contains(RoleId)).AsQueryable();
+                    var q = db.Users.Where(u => u.Roles.Any(y => y.RoleId.Contains(playerId) || y.RoleId.Contains(demoId))).AsQueryable();
                     if (searchValue != "")
                     {
                         q = q.Where(u => u.FullName.Contains(searchValue));
@@ -36,6 +42,12 @@ namespace WebGames.Libs
 
                     var users = q.ToList().Select(row => new UserDTModel()
                     {
+                        Roles = string.Join(",", row.Roles.Select(r => 
+                        {
+                            if (r.RoleId == playerId) return "Παίκτης";
+                            else if (r.RoleId == demoId) return "Demo";
+                            else return "";
+                        }) ),
                         Id = row.Id ?? "",
                         Name = row.FullName ?? "",
                         Email = row.Email,

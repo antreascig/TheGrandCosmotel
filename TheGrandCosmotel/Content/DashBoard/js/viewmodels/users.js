@@ -9,17 +9,22 @@
         SaveUser: SaveUser,
         ResetTokens: ResetTokens,
         resetTime: resetTime,
-        reSendConfirmation: reSendConfirmation
+        reSendConfirmation: reSendConfirmation,
+        CreateUser: CreateUser,
+        NewDemoCreation: NewDemoCreation,
+        NewDemoUser: ko.observable(null),
+        CancelCreateUser: CancelCreateUser
     };
 
     var columns = [
         { "title": "Id", "visible": false, "searchable": false, "target": 0 },
-        { "title": "Όνομα", "searchable": true, "target": 1 },
-        { "title": "Email", "searchable": true, "target": 2 },
-        { "title": "UserName", "searchable": true, "target": 3 },
-        { "title": "Κατάστημα", "searchable": true, "target": 4 },
+        { "title": "Roles", "visible": true, "searchable": true, "target": 1 },
+        { "title": "Όνομα", "searchable": true, "target": 2 },
+        { "title": "Email", "searchable": true, "target": 3 },
+        { "title": "UserName", "searchable": true, "target": 4 },
+        { "title": "Κατάστημα", "searchable": true, "target": 5 },
         {
-            "title": "Ρυθμίσεις", "searchable": false, "target": 5, createdCell: function (td, cellData, rowData, row, col) {
+            "title": "Ρυθμίσεις", "searchable": false, "target": 6, createdCell: function (td, cellData, rowData, row, col) {
                 // debugger;
                 var html = '<button type="button" class="btn btn-warning" onclick="newView.EditPlayer(' + row + ')">Edit</button>';
                 $(td).html(html);
@@ -44,7 +49,7 @@
     function EditPlayer(rowIndex) {
         var data = table.row(rowIndex).data();
         var id = data[0];
-        var name = data[1];
+        var name = data[2];
         $('#modalUserName').text(name);
 
         $.custom.Server["SendRequest"]("GET", "/Dashboard/GetUserDetails", { userId: id },
@@ -128,6 +133,42 @@
 
     function reSendConfirmation() {
 
+    }
+
+    function NewDemoCreation() {
+
+        $('#demoCreationModal').modal();
+
+        vm.NewDemoUser({
+            UserName: ko.observable(),
+            FullName: ko.observable(),
+            Email: ko.observable()
+        });
+
+    }
+
+    function CreateUser() {
+        var model = ko.toJS(vm.NewDemoUser);
+
+        $.custom.Server["SendRequest"]("GET", "/Dashboard/AddDemoPlayer", model,
+            function (res) { //success
+                // debugger
+                if (res) {
+                    if (res.success) {
+                        alert("Ο Χρήστης Δημιουργήθηκε ");
+                        $('#demoCreationModal').modal('hide');
+                        vm.RefreshUsers();
+                    }
+                    else {
+                        alert("Κάτι πήγε στραβά");
+                    }
+                }
+            },
+            function (error, hrx, code) { alert("Κάτι πήγε στραβά"); });
+    }
+
+    function CancelCreateUser() {
+        vm.NewDemoUser(null);
     }
 
     return vm;

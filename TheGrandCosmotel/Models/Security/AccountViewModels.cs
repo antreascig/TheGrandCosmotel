@@ -72,11 +72,6 @@ namespace WebGames.Models
         [DataType(DataType.Text)]
         [Display(Name = "Χόμπυ")]
         public string Hobby { get; set; }
-
-        [Required(ErrorMessage = "Το Εικονίδιο χρήστη είναι υποχρεωτικό.")]
-        [DataType(DataType.Text)]
-        [Display(Name = "Εικονίδιο χρήστη")]
-        public string Avatar { get; set; }
     }
 
     public class ResetPasswordViewModel
@@ -101,6 +96,24 @@ namespace WebGames.Models
 
     public class ForgotPasswordViewModel
     {
+        [Required(ErrorMessage = "To Email είναι υποχρεωτικό.")]
+        [EmailAddress(ErrorMessage = "Μη έγκυρο Email")]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+    }
+
+    public class DemoRegisterViewModel
+    {
+        [Required(ErrorMessage = "Το UserName είναι υποχρεωτικό.")]
+        [DataType(DataType.Text, ErrorMessage = "Λάθος UserName - Μπορεί να περιέχει λατινικούς χαρακτήρες και αριθμούς")]
+        [Display(Name = "UserName - Χρησιμοποιήστε κάτι διαφορετικό από το email σας")]
+        public string UserName { get; set; }
+
+        [Required(ErrorMessage = "Το Ονοματεπώνυμο είναι υποχρεωτικός.")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Ονοματεπώνυμο")]
+        public string FullName { get; set; }
+
         [Required(ErrorMessage = "To Email είναι υποχρεωτικό.")]
         [EmailAddress(ErrorMessage = "Μη έγκυρο Email")]
         [Display(Name = "Email")]

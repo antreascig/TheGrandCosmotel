@@ -19,11 +19,12 @@ namespace WebGames.Libs
 
             using (var context = ApplicationDbContext.Create())
             {
-                var RolesNames = new string[] { "sysadmin", "admin", "player" };
+                var RolesNames = new string[] { "sysadmin", "admin", "player", "demo" };
                 var saveChanges = false;
+                var ExistingRoles = context.Roles.ToList();
                 foreach (var roleName in RolesNames)
                 {
-                    if (context.Roles.FirstOrDefault(r => r.Name == roleName) == null)
+                    if (ExistingRoles.FirstOrDefault(r => r.Name == roleName) == null)
                     {
                         context.Roles.Add(new IdentityRole { Name = roleName });
                         saveChanges = true;
