@@ -289,3 +289,5 @@ __pycache__/
 
 /bin
 /TheGrandCosmotel/settings.json
+/TheGrandCosmotel/Scripts/umd
+/TheGrandCosmotel/Scripts/src
